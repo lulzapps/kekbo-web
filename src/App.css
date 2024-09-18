@@ -1,0 +1,141 @@
+/* Chat Page Layout */
+.chat-page 
+{
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Sidebar on the left */
+.sidebar 
+{
+  width: 25%;
+  background-color: #2d3436;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.sidebar h2 
+{
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar ul 
+{
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li 
+{
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.sidebar ul li:hover 
+{
+  background-color: #636e72;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Main Chat Window in the Center */
+.main-window 
+{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #dfe6e9;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Chat Messages */
+.chat-window 
+{
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+  border-bottom: 1px solid #b2bec3;
+}
+
+/* Align chat messages on the right */
+.chat-message 
+{
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  max-width: 60%;
+  margin-left: auto; /* Align to the right */
+}
+
+/* Command messages (aligned on the right) */
+.command-message 
+{
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #cfe8d3;
+  border-radius: 5px;
+  max-width: 60%;
+  margin-left: auto; /* Align to the right */
+}
+
+/* Invalid command messages (aligned on the right) */
+.invalid-command-message 
+{
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #f8d7da;
+  border-radius: 5px;
+  max-width: 60%;
+  margin-left: auto; /* Align to the right */
+}
+
+/* Remote messages (aligned on the left) */
+.remote-message 
+{
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #d3e0ff;
+  border-radius: 5px;
+  max-width: 60%;
+  margin-right: auto; /* Align to the left */
+}
+
+/* Input Area */
+.input-area 
+{
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-area input 
+{
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #b2bec3;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.input-area button 
+{
+  padding: 10px 20px;
+  background-color: #0984e3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.input-area button:hover 
+{
+  background-color: #74b9ff;
+}
