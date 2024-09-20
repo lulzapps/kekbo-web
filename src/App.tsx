@@ -124,7 +124,7 @@ const App: React.FC = () =>
                             if (msg[0] === MessageType.TEXT_MESSAGE)
                             {
                                 return (
-                                    <div key={index} className="chat-message">
+                                    <div key={index} className="chat-message user-message">
                                         {msg[1]}
                                     </div>
                                 )
@@ -132,14 +132,14 @@ const App: React.FC = () =>
                             else if (msg[0] === MessageType.COMMAND)
                             {
                                 return (
-                                    <div key={index} className="command-message">
+                                    <div key={index} className="command-message bot-message">
                                         {msg[1]}
                                     </div>
                                 )
                             }
 
                             return (
-                                <div key={index} className="invalid-command-message">
+                                <div key={index} className="invalid-command-message bot-message">
                                     {msg[1]}
                                 </div>
                             )
