@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import { InputParser, MessageType, ParsedMessage } from './InputParser';
 import { WebSocketService } from './WebSocketService';
 import { Commands } from './Commands';
-import assert from 'assert';
 
 type ChatMessage = [MessageType, string];
 
