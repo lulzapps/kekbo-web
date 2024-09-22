@@ -3,6 +3,8 @@ import './App.css';
 import { InputParser, MessageType, ParsedMessage } from './InputParser';
 import { WebSocketService } from './WebSocketService';
 import { Commands } from './Commands';
+import LoginModal from './LoginModal';
+import SidePanel from './SidePanel';
 
 type ChatMessage = [MessageType, string];
 
@@ -12,6 +14,7 @@ const App: React.FC = () =>
     const [chat, setChat] = useState<ChatMessage[]>([]); 
     const inputParser = new InputParser();
     const wsManager = useRef<WebSocketService | null>(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() =>
     {
@@ -101,60 +104,73 @@ const App: React.FC = () =>
         if (event.key === 'Enter') handleSendMessage();
     };
 
+    const handleLogin = (username: string, password: string, host: string) => 
+    {
+        // Handle login logic here (e.g., validate credentials, connect to host)
+        console.log('Logging in with', username, password, host);
+        setIsLoggedIn(true); // Assume login is successful
+    };
+
     return (
-        <div className="chat-page">
-            {/* Sidebar */}
-            <div className="sidebar">
-                <h2>Contacts</h2>
-                <ul>
-                    <li>User 1</li>
-                    <li>User 2</li>
-                    <li>User 3</li>
-                </ul>
-            </div>
+        <div className="App">
+            {!isLoggedIn && (
+                <LoginModal onLogin={handleLogin} showModal={!isLoggedIn} />
+            )}
 
-            {/* Main Chat Window */}
-            <div className="main-window">
-                <div className="chat-window">
-                    {
-                        chat.map((msg, index) => 
-                        {
-                            if (msg[0] === MessageType.TEXT_MESSAGE)
-                            {
-                                return (
-                                    <div key={index} className="chat-message user-message">
-                                        {msg[1]}
-                                    </div>
-                                )
-                            }
-                            else if (msg[0] === MessageType.COMMAND)
-                            {
-                                return (
-                                    <div key={index} className="command-message bot-message">
-                                        {msg[1]}
-                                    </div>
-                                )
-                            }
-
-                            return (
-                                <div key={index} className="invalid-command-message bot-message">
-                                    {msg[1]}
-                                </div>
-                            )
-                        })
-                    }
+            <div className="chat-page">
+                {/* Sidebar */}
+                <div className="sidebar">
+                    <h2>Contacts</h2>
+                    <ul>
+                        <li>User 1</li>
+                        <li>User 2</li>
+                        <li>User 3</li>
+                    </ul>
                 </div>
 
-                {/* Input Area */}
-                <div className="input-area">
-                    <input
-                        type="text"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        onKeyDown={handleKeyDown}
-                        placeholder="Type your message..."
-                    />
-                    <button onClick={handleSendMessage}>Send</button>
+                {/* Main Chat Window */}
+                <div className="main-window">
+                    <div className="chat-window">
+                        {
+                            chat.map((msg, index) => 
+                            {
+                                if (msg[0] === MessageType.TEXT_MESSAGE)
+                                {
+                                    return (
+                                        <div key={index} className="chat-message user-message">
+                                            {msg[1]}
+                                        </div>
+                                    )
+                                }
+                                else if (msg[0] === MessageType.COMMAND)
+                                {
+                                    return (
+                                        <div key={index} className="command-message bot-message">
+                                            {msg[1]}
+                                        </div>
+                                    )
+                                }
+
+                                return (
+                                    <div key={index} className="invalid-command-message bot-message">
+                                        {msg[1]}
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+
+                    {/* Input Area */}
+                    <div className="input-area">
+                        <input
+                            type="text"
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            onKeyDown={handleKeyDown}
+                            placeholder="Type your message..."
+                        />
+                        <button onClick={handleSendMessage}>Send</button>
+                    </div>
                 </div>
             </div>
         </div>

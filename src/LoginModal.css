@@ -1,0 +1,56 @@
+/* Modal content */
+.modal-content 
+{
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+}
+
+.input-group 
+{
+  margin-bottom: 15px;
+}
+
+.input-group label 
+{
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input-group input 
+{
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #b2bec3;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Login button specific styling */
+.login-button 
+{
+  padding: 10px 20px;
+  background-color: #0984e3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+}
+
+.login-button:hover 
+{
+  background-color: #74b9ff;
+}
+
+.status-row 
+{
+  margin-top: 10px;
+  color: red; /* Set to red for error messages */
+  font-size: 14px;
+}
