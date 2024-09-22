@@ -118,6 +118,8 @@ const App: React.FC = () =>
             )}
 
             <div className="chat-page">
+                <SidePanel/>
+
                 {/* Sidebar */}
                 <div className="sidebar">
                     <h2>Contacts</h2>
