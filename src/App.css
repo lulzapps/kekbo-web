@@ -1,3 +1,16 @@
+html, body 
+{
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Full height of the viewport */
+  overflow: hidden; /* Disable scrolling on the entire page */
+}
+
+.App 
+{
+  height: 100vh; /* Ensure the app container takes up the full viewport height */
+}
+
 /* Chat Page Layout */
 .chat-page 
 {

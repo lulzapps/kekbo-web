@@ -10,8 +10,8 @@ const SidePanel: React.FC = () =>
                 <div className="icon">🏠</div> {/* Example Icon (can replace with an actual icon library) */}
                 <div className="icon">🎮</div> {/* Example Icon */}
                 <div className="icon">💬</div> {/* Example Icon */}
-                <div className="icon">⚙️</div> {/* Example Icon */}
             </div>
+            <div className="icon settings-icon">⚙️</div>  {/* Settings Icon */}
         </div>
     );
 };
