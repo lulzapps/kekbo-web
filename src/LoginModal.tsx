@@ -5,7 +5,6 @@ import './LoginModal.css';
 const parseHostAndPort = (input: string) => 
 {
     const [host, port] = input.split(':');
-
     return { host, port };
 };
 
@@ -32,8 +31,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ onLogin, showModal }) =>
         console.log('username:', username);
         console.log('password:', password);
         console.log('host:', host);
+        const result = parseHostAndPort(host);
 
-        if (!host.includes('.') && host !== 'localhost') 
+        if (!result.host.includes('.') && result.host !== 'localhost') 
         {
             setStatus('Invalid host');
             return;
