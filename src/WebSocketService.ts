@@ -10,33 +10,38 @@ export class WebSocketService
     }
 
     // Connect to WebSocket
-    connect() 
+    connect() : Promise<void>
     {
-        this.socket = new WebSocket(this.url);
-
-        // Handle connection open
-        this.socket.onopen = () => 
+        return new Promise((resolve, reject) => 
         {
-            console.log('WebSocket connected');
-        };
+            this.socket = new WebSocket(this.url);
 
-        // Handle incoming messages
-        this.socket.onmessage = (event) => 
-        {
-            console.log('Received:', event.data);
-        };
+            // Handle connection open
+            this.socket.onopen = () => 
+            {
+                console.log('WebSocket connected');
+            };
 
-        // Handle errors
-        this.socket.onerror = (error) => 
-        {
-            console.error('WebSocket error:', error);
-        };
+            // Handle incoming messages
+            this.socket.onmessage = (event) => 
+            {
+                console.log('Received:', event.data);
+                resolve();
+            };
 
-        // Handle connection close
-        this.socket.onclose = () => 
-        {
-            console.log('WebSocket disconnected');
-        };
+            // Handle errors
+            this.socket.onerror = (error) => 
+            {
+                console.error('WebSocket error:', error);
+                reject(new Error('WebSocket error: ' + error));
+            };
+
+            // Handle connection close
+            this.socket.onclose = () => 
+            {
+                console.log('WebSocket disconnected');
+            };
+        });
     }
 
     // Send a message

@@ -104,17 +104,11 @@ const App: React.FC = () =>
         if (event.key === 'Enter') handleSendMessage();
     };
 
-    const handleLogin = (username: string, password: string, host: string) => 
-    {
-        // Handle login logic here (e.g., validate credentials, connect to host)
-        console.log('Logging in with', username, password, host);
-        setIsLoggedIn(true); // Assume login is successful
-    };
-
     return (
         <div className="App">
             {!isLoggedIn && (
-                <LoginModal onLogin={handleLogin} showModal={!isLoggedIn} />
+                <LoginModal onLogin={(websocket) => { wsManager.current = websocket; setIsLoggedIn(true); }}
+                    showModal={!isLoggedIn} />
             )}
 
             <div className="chat-page">

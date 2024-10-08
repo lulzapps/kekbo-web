@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';  
 import './LoginModal.css';
+import { WebSocketService } from './WebSocketService';
 
 const parseHostAndPort = (input: string) => 
 {
@@ -10,7 +11,7 @@ const parseHostAndPort = (input: string) =>
 
 interface LoginModalProps 
 {
-    onLogin: (username: string, password: string, host: string) => void;
+    onLogin: (websocket: WebSocketService) => void;
     showModal: boolean;
 }
 
@@ -18,7 +19,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onLogin, showModal }) =>
 {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [host, setHost] = useState('localhost:3000');
+    const [host, setHost] = useState('localhost:8000');
     const [status, setStatus] = useState(''); 
 
     if (!showModal) 
@@ -39,7 +40,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ onLogin, showModal }) =>
             return;
         }
 
-        onLogin(username, password, host);
+        var websocket = new WebSocketService(`ws://${result.host}:${result.port}/ws`);
+        websocket.connect();
+        
+        onLogin(websocket);
     };
 
     return (
