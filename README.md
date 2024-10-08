@@ -1,3 +1,63 @@
+# How to Run
+
+## Windows
+
+### Setup Environment
+
+Both Node.js and `npm` need to be installed. On Windows, I prefer to use _Fast Node Manager_, aka `fnm`. 
+
+To install `fnm` do:`
+
+```ps
+winget install Schniz.fnm
+```
+
+* Now setup node environment:
+```ps
+fnm env --use-on-cd | Out-String | Invoke-Expression
+```
+
+* Download and Install Node.js
+```ps
+fnm use --install-if-missing 20
+```
+
+At this point the `node.exe` is installed, and so is the `npm` script. However, your system may not allow you to run `npm` if it is not configured to run scripts. To allow this do:
+
+```ps
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted
+```
+
+Now node and npm should work: 
+
+```bash
+node -v # should print something like `v20.18.0`
+
+npm -v # should print something like `10.8.2`
+```
+
+### Running Kekbo Web Client
+
+*  Clone the repo
+```ps
+git clone https://github.com/lulzapps/kekbo-client
+```
+
+* Install npm dependencies
+```ps
+cd kekbo-client
+npm install
+```
+
+* Launch the client
+```ps
+npm start
+```
+
+
+
+<hr/>
+<center><font color="red"><h2>Generated ReadMe Text Comes Under Here</h2></font></center>
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
