@@ -20,6 +20,7 @@ export class WebSocketService
             this.socket.onopen = () => 
             {
                 console.log('WebSocket connected');
+                resolve();
             };
 
             // Handle incoming messages
@@ -37,9 +38,13 @@ export class WebSocketService
             };
 
             // Handle connection close
-            this.socket.onclose = () => 
+            this.socket.onclose = (event) => 
             {
                 console.log('WebSocket disconnected');
+                if (event.wasClean === false && this.socket?.readyState !== WebSocket.OPEN) 
+                {
+                    reject(new Error('WebSocket connection closed unexpectedly.'));
+                }
             };
         });
     }

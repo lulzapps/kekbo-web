@@ -27,7 +27,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onLogin, showModal }) =>
         return null; // Don't render the modal if showModal is false
     }
 
-    const handleLogin = () => 
+    const handleLogin = async () => 
     {
         console.log('username:', username);
         console.log('password:', password);
@@ -40,10 +40,24 @@ const LoginModal: React.FC<LoginModalProps> = ({ onLogin, showModal }) =>
             return;
         }
 
-        var websocket = new WebSocketService(`ws://${result.host}:${result.port}/ws`);
-        websocket.connect();
-        
-        onLogin(websocket);
+        try
+        {
+            const websocket = new WebSocketService(`ws://${result.host}:${result.port}/ws`);
+            await websocket.connect();
+            onLogin(websocket);
+        }
+        catch (error)
+        {
+            if (error instanceof Error) 
+            {
+                // If there is an error, update the status to show the error message
+                setStatus('Failed to connect to WebSocket: ' + error.message);
+            } 
+            else 
+            {
+                setStatus('An unknown error occurred');
+            }
+        }
     };
 
     return (

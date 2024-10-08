@@ -104,11 +104,17 @@ const App: React.FC = () =>
         if (event.key === 'Enter') handleSendMessage();
     };
 
+    const handleLogin = (websocket: WebSocketService) =>
+    {
+        wsManager.current = websocket;
+        setIsLoggedIn(true);
+        printMessage([MessageType.COMMAND, 'Connected to WebSocket']);
+    }
+
     return (
         <div className="App">
             {!isLoggedIn && (
-                <LoginModal onLogin={(websocket) => { wsManager.current = websocket; setIsLoggedIn(true); }}
-                    showModal={!isLoggedIn} />
+                <LoginModal onLogin={handleLogin} showModal={!isLoggedIn} />
             )}
 
             <div className="chat-page">
