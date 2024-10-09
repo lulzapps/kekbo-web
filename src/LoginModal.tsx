@@ -15,6 +15,19 @@ interface LoginModalProps
     showModal: boolean;
 }
 
+// a validate user function that returns true or false
+const validateUser = async (username: string, password: string, websocket: WebSocketService) => 
+{
+    // craft a json object with the username and password, and "action" set to "login"
+    const credentials = JSON.stringify({ username, password, action: 'login' });
+    websocket.sendMessage(credentials);
+    const response = await websocket.receiveMessage();
+    // parse the response from the server
+    const parsedResponse = JSON.parse(response);
+    // print the status field of the json
+    console.log("!!!" + parsedResponse.status + "!!!");
+}
+
 const LoginModal: React.FC<LoginModalProps> = ({ onLogin, showModal }) => 
 {
     const [username, setUsername] = useState('');
@@ -44,6 +57,13 @@ const LoginModal: React.FC<LoginModalProps> = ({ onLogin, showModal }) =>
         {
             const websocket = new WebSocketService(`ws://${result.host}:${result.port}/ws`);
             await websocket.connect();
+
+            if (!validateUser(username, password, websocket))
+            {
+                setStatus('Invalid username or password');
+                return;
+            }
+
             onLogin(websocket);
         }
         catch (error)

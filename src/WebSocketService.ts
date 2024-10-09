@@ -23,12 +23,12 @@ export class WebSocketService
                 resolve();
             };
 
-            // Handle incoming messages
-            this.socket.onmessage = (event) => 
-            {
-                console.log('Received:', event.data);
-                resolve();
-            };
+            // // Handle incoming messages
+            // this.socket.onmessage = (event) => 
+            // {
+            //     console.log('Received:', event.data);
+            //     resolve();
+            // };
 
             // Handle errors
             this.socket.onerror = (error) => 
@@ -50,7 +50,7 @@ export class WebSocketService
     }
 
     // Send a message
-    sendMessage(message: string) 
+    sendMessage(message: string)
     {
         if (this.socket && this.socket.readyState === WebSocket.OPEN) 
         {
@@ -60,6 +60,31 @@ export class WebSocketService
         {
             console.error('WebSocket is not connected');
         }
+    }
+
+    async receiveMessage(): Promise<string> 
+    {
+        return new Promise((resolve, reject) => 
+        {
+            if (!this.socket) 
+            {
+                reject(new Error('WebSocket is not connected.'));
+                return;
+            }
+
+            // Set up the message handler
+            this.socket.onmessage = (event) => 
+            {
+                resolve(event.data);
+            };
+
+            // Handle errors
+            this.socket.onerror = (error) => 
+            {
+                console.error('WebSocket error while receiving message:', error);
+                reject(new Error('WebSocket error while receiving message: ' + error));
+            };
+        });
     }
 
     // Close the WebSocket connection
