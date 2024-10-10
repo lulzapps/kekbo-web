@@ -22,10 +22,8 @@ const validateUser = async (username: string, password: string, websocket: WebSo
     const credentials = JSON.stringify({ username, password, action: 'login' });
     websocket.sendMessage(credentials);
     const response = await websocket.receiveMessage();
-    // parse the response from the server
     const parsedResponse = JSON.parse(response);
-    // print the status field of the json
-    console.log("!!!" + parsedResponse.status + "!!!");
+    return parsedResponse.status === "success" ? true : false;
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({ onLogin, showModal }) => 
@@ -58,7 +56,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onLogin, showModal }) =>
             const websocket = new WebSocketService(`ws://${result.host}:${result.port}/ws`);
             await websocket.connect();
 
-            if (!validateUser(username, password, websocket))
+            if (await validateUser(username, password, websocket) === false)
             {
                 setStatus('Invalid username or password');
                 return;
