@@ -23,14 +23,6 @@ export class WebSocketService
                 resolve();
             };
 
-            // // Handle incoming messages
-            // this.socket.onmessage = (event) => 
-            // {
-            //     console.log('Received:', event.data);
-            //     resolve();
-            // };
-
-            // Handle errors
             this.socket.onerror = (error) => 
             {
                 console.error('WebSocket error:', error);
